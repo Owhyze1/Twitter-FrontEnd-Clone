@@ -18,11 +18,13 @@ $(document).ready(function(){
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   $updateFeedButton.appendTo($HomeFeed);
   $updateFeedButton.on("click", function(event) {
-
     // need to update tweets
     var streamSize = streams.home.length - 1;
-    addNewTweetsForUpdateFeedButton(lastStreamSize);
+    addNewTweetsInReverseChronologicalOrder(lastStreamSize);
   });
+
+  var $divForTweets = $('<div></div>');
+  $divForTweets.appendTo($HomeFeed);
 
 
   var index = streams.home.length - 1;
@@ -30,22 +32,29 @@ $(document).ready(function(){
   while(index >= 0){
     var tweet = streams.home[index];
     var $tweet = $('<div class="tweet"></div>');
+    // $tweet.text('@' + tweet.user + ': ' + tweet.message + '       ' + tweet.created_at.getHours() + ":" + tweet.created_at.getMinutes() + ":" + tweet.created_at.getSeconds());
     $tweet.text('@' + tweet.user + ': ' + tweet.message);
-    $tweet.appendTo($HomeFeed);
+    $tweet.appendTo($divForTweets);
     index -= 1;
   }
 
-  var addNewTweetsForUpdateFeedButton = function(index) {
-    var sizeOfStreamBeforeUpdate = index;
-    var currentStreamSize = streams.home.length - 1;
 
-    while (currentStreamSize > sizeOfStreamBeforeUpdate){
-      var tweet = streams.home[currentStreamSize];
+  var addNewTweetsInReverseChronologicalOrder = function(oldestDisplayedTweetIndex) {
+    var mostRecentTweetIndex = streams.home.length - 1;
+    var lastestTweets = [];
+
+    while (mostRecentTweetIndex > oldestDisplayedTweetIndex){
+      var tweet = streams.home[mostRecentTweet];
       var $tweet = $('<div class="tweet"></div>');
+      // $tweet.text('@' + tweet.user + ': ' + tweet.message + '         ' + tweet.created_at.getHours() + ":" + tweet.created_at.getMinutes() + ":" + tweet.created_at.getSeconds());
       $tweet.text('@' + tweet.user + ': ' + tweet.message);
-      $tweet.appendTo($HomeFeed);
-      currentStreamSize -= 1;
+      lastestTweets.push($tweet);
+      mostRecentTweetIndex -= 1;
     }
+    $divForTweets.prepend(lastestTweets);
   }
+
+
+
 
 });
