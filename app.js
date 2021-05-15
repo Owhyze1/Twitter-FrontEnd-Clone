@@ -18,43 +18,27 @@ $(document).ready(function(){
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   $updateFeedButton.appendTo($HomeFeed);
   $updateFeedButton.on("click", function(event) {
-    // need to update tweets
-    var streamSize = streams.home.length - 1;
-    addNewTweetsInReverseChronologicalOrder(lastStreamSize);
+    addNewTweetsInReverseChronologicalOrder(lastStreamSize, streams.home.length - 1);
   });
 
   var $divForTweets = $('<div></div>');
   $divForTweets.appendTo($HomeFeed);
 
+  var lastStreamSize = streams.home.length - 1;
+  addNewTweetsInReverseChronologicalOrder(0, lastStreamSize);
 
-  var index = streams.home.length - 1;
-  var lastStreamSize = index;
-  while(index >= 0){
-    var tweet = streams.home[index];
-    var $tweet = $('<div class="tweet"></div>');
-    // $tweet.text('@' + tweet.user + ': ' + tweet.message + '       ' + tweet.created_at.getHours() + ":" + tweet.created_at.getMinutes() + ":" + tweet.created_at.getSeconds());
-    $tweet.text('@' + tweet.user + ': ' + tweet.message);
-    $tweet.appendTo($divForTweets);
-    index -= 1;
-  }
-
-
-  var addNewTweetsInReverseChronologicalOrder = function(oldestDisplayedTweetIndex) {
-    var mostRecentTweetIndex = streams.home.length - 1;
+  function addNewTweetsInReverseChronologicalOrder(oldestTweet, newestTweet) {
     var lastestTweets = [];
 
-    while (mostRecentTweetIndex > oldestDisplayedTweetIndex){
-      var tweet = streams.home[mostRecentTweet];
+    while (newestTweet > oldestTweet){
+      var tweet = streams.home[newestTweet];
       var $tweet = $('<div class="tweet"></div>');
-      // $tweet.text('@' + tweet.user + ': ' + tweet.message + '         ' + tweet.created_at.getHours() + ":" + tweet.created_at.getMinutes() + ":" + tweet.created_at.getSeconds());
-      $tweet.text('@' + tweet.user + ': ' + tweet.message);
+      var time = tweet.created_at;
+      $tweet.text('@' + tweet.user + ': ' + tweet.message + ', at ' + time.getHours() + ":" + time.getMinutes() + ':' + time.getSeconds());
       lastestTweets.push($tweet);
-      mostRecentTweetIndex -= 1;
+      newestTweet -= 1;
     }
     $divForTweets.prepend(lastestTweets);
   }
-
-
-
 
 });
