@@ -18,16 +18,20 @@ $(document).ready(function(){
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   $updateFeedButton.appendTo($HomeFeed);
   $updateFeedButton.on("click", function(event) {
-    addNewTweetsInReverseChronologicalOrder(lastStreamSize, streams.home.length - 1);
+    renderFeed(lastStreamSize, streams.home.length - 1);
   });
 
-  var $divForTweets = $('<div id="feed"></div>');
-  $divForTweets.appendTo($HomeFeed);
+  var $feed = $('<div id="feed"></div>');
+  $feed.appendTo($HomeFeed);
 
   var lastStreamSize = streams.home.length - 1;
-  addNewTweetsInReverseChronologicalOrder(0, lastStreamSize);
+  renderFeed(0, lastStreamSize);
 
-  function addNewTweetsInReverseChronologicalOrder(oldestTweet, newestTweet) {
+
+
+
+
+  function renderFeed(oldestTweet, newestTweet) {
     var lastestTweets = [];
 
     while (newestTweet > oldestTweet){
@@ -38,7 +42,6 @@ $(document).ready(function(){
       lastestTweets.push($tweet);
       newestTweet -= 1;
     }
-    $divForTweets.prepend(lastestTweets);
+    $feed.prepend(lastestTweets);
   }
-
 });
