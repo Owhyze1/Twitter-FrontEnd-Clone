@@ -21,7 +21,7 @@ $(document).ready(function(){
     addNewTweetsInReverseChronologicalOrder(lastStreamSize, streams.home.length - 1);
   });
 
-  var $divForTweets = $('<div></div>');
+  var $divForTweets = $('<div id="feed"></div>');
   $divForTweets.appendTo($HomeFeed);
 
   var lastStreamSize = streams.home.length - 1;
