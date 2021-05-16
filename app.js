@@ -13,6 +13,8 @@ $(document).ready(function () {
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   var $feed = $('<div id="feed"></div>');
 
+  var $UserFeed = $('<div><h3>User Feed</h3></div');
+
 
   // create event handler functions
   function titleEvent(event) {
@@ -43,23 +45,46 @@ $(document).ready(function () {
   $feed.appendTo($HomeFeed);
 
   // var lastStreamSize = streams.home.length - 1;
-  var numberOfDisplayedTweets = renderFeed(0);
+  var numberOfDisplayedTweets = renderFeed(0, "shawndrost");
 
   // helper functions
-  function renderFeed(oldestTweet) {
-    var currentSreamSize = streams.home.length - 1;
+  function renderFeed(oldestTweet, user) {
+    if ( user === undefined ) {
+      var tweets = streams.home;
+      var feed = $feed;
+    } else {
+      var tweets = streams.users[user];
+      var feed = $feed;//$UserFeed;
+    }
+
+    var currentSreamSize = tweets.length - 1;
     var lastestTweets = [];
     var indexOfNewestTweet = currentSreamSize;
 
     while (indexOfNewestTweet > oldestTweet) {
-      var tweet = streams.home[indexOfNewestTweet];
+      var tweet = tweets[indexOfNewestTweet];
       var $tweet = tweetUIcomponent(tweet);
       lastestTweets.push($tweet);
       indexOfNewestTweet -= 1;
     }
-    $feed.prepend(lastestTweets);
+    feed.prepend(lastestTweets);
     return currentSreamSize;
   }
+
+  // function renderUserFeed(user){
+  //   var tweets = streams.users.user;
+  //   var index = tweets.length - 1;
+  //   var latestTweets = [];
+
+  //   while (index >= 0 ) {
+  //     var tweet = tweets[index];
+  //     var $tweet tweetUIcomponent(tweet);
+  //     latestTweets.push($tweet);
+  //     index -= 1;
+  //   }
+  //   $UserFeed.append(latestTweets);
+  //   // return
+  // }
 
   function tweetUIcomponent(tweet) {
     // new HTML elements
@@ -74,7 +99,7 @@ $(document).ready(function () {
     var $share = $('<i class="icon comment fas fa-share-square"></i>');
 
     // add image attributes
-    $tweet.attr("src", tweet.profilePhotoURL);
+    $img.attr("src", tweet.profilePhotoURL);
 
     // add text
     $username.text('@' + tweet.user);
