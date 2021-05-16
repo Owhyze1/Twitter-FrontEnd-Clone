@@ -1,47 +1,63 @@
-$(document).ready(function(){
-  var $app = $('#app');
-  $app.html('');
+$(document).ready(function () {
 
+  // select existing elements
+  var $app = $('#app');
+  // $app.html('');
+
+  // create new HTML elements
   var $title = $('<h1>Twiddler</h1>');
-  $title.appendTo($app);
-  $title.on("click", function(event) {
+  var $TweetFeed = $('<div><h2>Tweet Feed</h2></div>');
+  var $HomeFeed = $('<div><h3>Home Feed</h3></div>');
+  var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
+  var $feed = $('<div id="feed"></div>');
+
+
+  // create event handler functions
+  function titleEvent(event) {
     console.log(event);
     alert('The title of this page is: ' + event.target.innerText);
-  });
+  }
+  function updateFeedEvent(event) {
+    renderFeed(numberOfDisplayedTweets);
+  }
 
-  var $TweetFeed = $('<div><h2>Tweet Feed</h2></div>');
+
+  // set event listeners (and relevant handlers)
+  $title.on("click", titleEvent);
+  $updateFeedButton.on("click", updateFeedEvent);
+
+
+  // append new html elements to the DOM
+  $title.appendTo($app);
   $TweetFeed.appendTo($app);
-
-  var $HomeFeed = $('<div><h3>Home Feed</h3></div>');
   $HomeFeed.appendTo($TweetFeed);
-
-  var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   $updateFeedButton.appendTo($HomeFeed);
-  $updateFeedButton.on("click", function(event) {
-    renderFeed(lastStreamSize, streams.home.length - 1);
-  });
-
-  var $feed = $('<div id="feed"></div>');
   $feed.appendTo($HomeFeed);
 
-  var lastStreamSize = streams.home.length - 1;
-  renderFeed(0, lastStreamSize);
 
 
 
+  // var lastStreamSize = streams.home.length - 1;
+  var numberOfDisplayedTweets = renderFeed(0);
 
 
-  function renderFeed(oldestTweet, newestTweet) {
+  // helper functions
+  function renderFeed(oldestTweet) {
+    var currentSreamSize = streams.home.length - 1;
     var lastestTweets = [];
+    var indexOfNewestTweet = currentSreamSize;
 
-    while (newestTweet > oldestTweet){
-      var tweet = streams.home[newestTweet];
+    while (indexOfNewestTweet > oldestTweet) {
+      var tweet = streams.home[indexOfNewestTweet];
       var $tweet = $('<div class="tweet"></div>');
       var time = tweet.created_at;
       $tweet.text('@' + tweet.user + ': ' + tweet.message + ', at ' + time.getHours() + ":" + time.getMinutes() + ':' + time.getSeconds());
       lastestTweets.push($tweet);
-      newestTweet -= 1;
+      indexOfNewestTweet -= 1;
     }
     $feed.prepend(lastestTweets);
+    return currentSreamSize;
   }
+
+
 });
