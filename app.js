@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  jQuery("time.timeago").timeago();
+
   // select existing elements
   var $app = $('#app');
   // $app.html('');
@@ -81,7 +83,8 @@ $(document).ready(function () {
     // add text
     $username.text('@' + tweet.user);
     $message.text(tweet.message);
-    $timestamp.text(tweet.created_at);
+    // $timestamp.text(tweet.created_at);
+    $timestamp.text(jQuery.timeago(tweet.created_at));
 
     // append
     $img.appendTo($tweet);
