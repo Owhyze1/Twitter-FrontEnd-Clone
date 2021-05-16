@@ -28,7 +28,6 @@ $(document).ready(function () {
   $title.on("click", titleEvent);
   $updateFeedButton.on("click", updateFeedEvent);
 
-
   // append new html elements to the DOM
   $title.appendTo($app);
   $TweetFeed.appendTo($app);
@@ -36,12 +35,8 @@ $(document).ready(function () {
   $updateFeedButton.appendTo($HomeFeed);
   $feed.appendTo($HomeFeed);
 
-
-
-
   // var lastStreamSize = streams.home.length - 1;
   var numberOfDisplayedTweets = renderFeed(0);
-
 
   // helper functions
   function renderFeed(oldestTweet) {
@@ -51,9 +46,7 @@ $(document).ready(function () {
 
     while (indexOfNewestTweet > oldestTweet) {
       var tweet = streams.home[indexOfNewestTweet];
-      var $tweet = tweetUIcomponent(tweet);//$('<div class="tweet"></div>');
-      // var time = tweet.created_at;
-      // $tweet.text('@' + tweet.user + ': ' + tweet.message + ', at ' + time.getHours() + ":" + time.getMinutes() + ':' + time.getSeconds());
+      var $tweet = tweetUIcomponent(tweet);
       lastestTweets.push($tweet);
       indexOfNewestTweet -= 1;
     }
@@ -75,10 +68,6 @@ $(document).ready(function () {
 
     // add image attributes
     $tweet.attr("src", tweet.profilePhotoURL);
-    $comment.attr("src", "assets/icons/placeholder.png");
-    $retweet.attr("src", "assets/icons/placeholder.png");
-    $like.attr("src", "assets/icons/placeholder.png");
-    $share.attr("src", "assets/icons/placeholder.png");
 
     // add text
     $username.text('@' + tweet.user);
