@@ -22,11 +22,18 @@ $(document).ready(function () {
   function updateFeedEvent(event) {
     renderFeed(numberOfDisplayedTweets);
   }
+  function iconMouseOverColorChange(event) {
+    $(event.target).css("color", "tomato");
+  }
+  function iconMouseOutColorReturn(event) {
+    $(event.target).css("color", "black");
+  }
 
 
   // set event listeners (and relevant handlers)
   $title.on("click", titleEvent);
   $updateFeedButton.on("click", updateFeedEvent);
+
 
   // append new html elements to the DOM
   $title.appendTo($app);
@@ -73,6 +80,19 @@ $(document).ready(function () {
     $username.text('@' + tweet.user);
     $message.text(tweet.message);
     $timestamp.text(jQuery.timeago(tweet.created_at));
+
+
+    // Tweet UI event handlers
+    $comment.on("mouseover", iconMouseOverColorChange);
+    $retweet.on("mouseover", iconMouseOverColorChange);
+    $like.on("mouseover", iconMouseOverColorChange);
+    $share.on("mouseover", iconMouseOverColorChange);
+
+    $comment.on("mouseout", iconMouseOutColorReturn);
+    $retweet.on("mouseout", iconMouseOutColorReturn);
+    $like.on("mouseout", iconMouseOutColorReturn);
+    $share.on("mouseout", iconMouseOutColorReturn);
+
 
     // append
     $img.appendTo($tweet);
