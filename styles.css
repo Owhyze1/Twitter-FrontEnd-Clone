@@ -1,6 +1,6 @@
 /* These CSS rules apply to the <html>, <body>, and <div id="app"> HTML elements in index.html */
 html, body, #app {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   margin: 0;
 }
@@ -9,6 +9,10 @@ html, body, #app {
 providing a space for you to apply styles to your app's outermost HTML element - the #app itself. */
 
 #app {
-  background-color: green;
-  color: yellow;
+  background-color: lightblue;
+  color: black;
+}
+
+h1 {
+  font-family: 'KoHo', sans-serif;
 }
