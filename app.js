@@ -68,10 +68,10 @@ $(document).ready(function () {
     var $username = $('<span class="username"></span>');
     var $message = $('<span class="message"></span>');
     var $timestamp = $('<span class="timestamp"></span>');
-    var $comment = $('<img class="icon comment">');
-    var $retweet = $('<img class="icon retweet">');
-    var $like = $('<img class="icon like">');
-    var $share = $('<img class="icon share">');
+    var $comment = $('<i class="icon comment far fa-comment"></i>');
+    var $retweet = $('<i class="icon comment fas fa-retweet"></i>');
+    var $like = $('<i class="icon comment far fa-heart"></i>');
+    var $share = $('<i class="icon comment fas fa-share-square"></i>');
 
     // add image attributes
     $tweet.attr("src", tweet.profilePhotoURL);
@@ -83,7 +83,6 @@ $(document).ready(function () {
     // add text
     $username.text('@' + tweet.user);
     $message.text(tweet.message);
-    // $timestamp.text(tweet.created_at);
     $timestamp.text(jQuery.timeago(tweet.created_at));
 
     // append
