@@ -49,9 +49,9 @@ $(document).ready(function () {
 
     while (indexOfNewestTweet > oldestTweet) {
       var tweet = streams.home[indexOfNewestTweet];
-      var $tweet = $('<div class="tweet"></div>');
-      var time = tweet.created_at;
-      $tweet.text('@' + tweet.user + ': ' + tweet.message + ', at ' + time.getHours() + ":" + time.getMinutes() + ':' + time.getSeconds());
+      var $tweet = tweetUIcomponent(tweet);//$('<div class="tweet"></div>');
+      // var time = tweet.created_at;
+      // $tweet.text('@' + tweet.user + ': ' + tweet.message + ', at ' + time.getHours() + ":" + time.getMinutes() + ':' + time.getSeconds());
       lastestTweets.push($tweet);
       indexOfNewestTweet -= 1;
     }
@@ -59,5 +59,40 @@ $(document).ready(function () {
     return currentSreamSize;
   }
 
+  function tweetUIcomponent(tweet) {
+    // new HTML elements
+    var $tweet = $('<div class="tweet"></div>');
+    var $img = $('<img class="profile-photo">');
+    var $username = $('<span class="username"></span>');
+    var $message = $('<span class="message"></span>');
+    var $timestamp = $('<span class="timestamp"></span>');
+    var $comment = $('<img class="icon comment">');
+    var $retweet = $('<img class="icon retweet">');
+    var $like = $('<img class="icon like">');
+    var $share = $('<img class="icon share">');
 
+    // add image attributes
+    $tweet.attr("src", tweet.profilePhotoURL);
+    $comment.attr("src", "assets/icons/placeholder.png");
+    $retweet.attr("src", "assets/icons/placeholder.png");
+    $like.attr("src", "assets/icons/placeholder.png");
+    $share.attr("src", "assets/icons/placeholder.png");
+
+    // add text
+    $username.text('@' + tweet.user);
+    $message.text(tweet.message);
+    $timestamp.text(tweet.created_at);
+
+    // append
+    $img.appendTo($tweet);
+    $username.appendTo($tweet);
+    $message.appendTo($tweet);
+    $timestamp.appendTo($tweet);
+    $comment.appendTo($tweet);
+    $retweet.appendTo($tweet);
+    $like.appendTo($tweet);
+    $share.appendTo($tweet);
+
+    return $tweet;
+  }
 });
