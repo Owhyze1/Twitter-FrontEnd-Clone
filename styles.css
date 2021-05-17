@@ -1,6 +1,6 @@
 /* These CSS rules apply to the <html>, <body>, and <div id="app"> HTML elements in index.html */
 html, body, #app {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin: 0;
 }
@@ -13,6 +13,65 @@ providing a space for you to apply styles to your app's outermost HTML element -
   color: black;
 }
 
+.home-feed {
+  background-color: lightblue;
+}
+
 h1 {
   font-family: 'KoHo', sans-serif;
+}
+
+
+/* tweet UI */
+
+/* div */
+.tweet {
+  /* background-color: lightblue; */
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  height: 150px;
+  width: 600px;
+}
+
+/* div */
+.right-side {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* span */
+.message {
+  /* background-color: lightgreen; */
+  font-size: xx-large;
+  height: 80%;
+  padding: 5px;
+}
+
+.time-and-icon-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+/* span */
+.timestamp {
+  /* background-color: orange; */
+  justify-content: flex-start;
+}
+
+.icon-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/* i */
+i {
+  /* background-color: white; */
+  margin-right: 10px;
 }
