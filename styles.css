@@ -12,34 +12,79 @@ providing a space for you to apply styles to your app's outermost HTML element -
 :root {
   --Koho: 'KoHo', sans-serif;
   --Pattaya: 'Pattaya', sans-serif;
+  --grey: rgb(242, 248, 250);
+  --golden: rgb(243, 219, 139);
+  --red: rgba(78, 12, 12, 0.966);
 }
 
-
 #app {
-  background-color: lightblue;
-  color: black;
-  /* display: flex; */
-  /* flex-direction: column; */
+  color: rgb(58, 54, 54);
+}
+
+#bottom-half {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--grey);
+}
+
+#left-half {
+  width: 30%;
 }
 
 #feed {
-  background-color: lightblue;
+  background-color: var(--grey);
+  width: 70%;
 }
 
 .title {
   font-family: var(--Pattaya);
   font-size: 500%;
+  color: var(--red);
+  background-color: var(--grey);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+/* button */
+button {
+ background-color: var(--golden);
+ color: var(--red);
+ font-family: var(--Koho);
+ font-size: x-large;
+ font-weight: bold;
+ border-radius: 1ex;
+ border-width: 1px;
+ border-color: var(--red);
+ height: 2em;
+ width: 7em;
+}
+
+.profile-photo {
+  border-style: hidden;
+  border-top-left-radius: 5em;
+  /* border-bottom-left-radius: 1em; */
+  border-bottom-right-radius: 4em;
+}
 
 /* tweet UI */
-
 .tweet {
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
   height: 150px;
-  width: 90%;
+  width: 50%;
+  min-height: 150px;
+  min-width: 450px;
+  border: var(--golden);
+  border-style: solid;
+  border-radius: 5em;
+  border-bottom-left-radius: 3em;
+  border-top-right-radius: 3em;
+  border-width: 3.5ex;
+  /* border-bottom-width: 2ex;
+  border-top-width: 2ex; */
 }
 
 .right-side {
@@ -47,6 +92,9 @@ providing a space for you to apply styles to your app's outermost HTML element -
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-style: hidden;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 2em;
   width: 100%;
 }
 
@@ -56,6 +104,7 @@ providing a space for you to apply styles to your app's outermost HTML element -
   font-weight: bold;
   margin-left: 5px;
   height: 20%;
+  color: var(--red);
 }
 
 .message {
@@ -73,19 +122,17 @@ providing a space for you to apply styles to your app's outermost HTML element -
   justify-content: flex-start;
   padding-left: 5px;
   width: 50%;
-  /* background-color: orange; */
+  font-style:oblique;
 }
 
 .icon-div {
   display: flex;
   flex-direction: row;
-  /* background-color: yellow; */
   width: 50%;
 }
 
 i {
   font-size: large;
-  /* background-color: pink; */
   justify-content: space-around;
   width: 25%;
   text-align: center;
