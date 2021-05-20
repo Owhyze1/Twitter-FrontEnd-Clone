@@ -55,11 +55,13 @@ $(document).ready(function () {
   $updateFeedButton.appendTo($title);
   $bottomHalf.appendTo($app);
   $friendListDiv.appendTo($bottomHalf);
-  $feed.appendTo($bottomHalf);
   $friendList.appendTo($friendListDiv);
+  $feed.appendTo($bottomHalf);
+  $tweetFormDiv.appendTo($bottomHalf);
 
   renderFeed();
   renderFriendList();
+  tweetFormUI();
 
   // helper functions
   function renderFeed(user) {
@@ -85,6 +87,27 @@ $(document).ready(function () {
       $friend.text(friends[i]);
       $friend.appendTo($friendList);
     }
+  }
+
+  function tweetFormUI() {
+    // username input and label
+    var $form = $('<form id="form"></form>');
+    var $usernameLabel = $('<label for="username">User name</label>');
+    var $usernameInput = $('<input type="text" id="user-name-input" name="username"><br>');
+
+    // message input and label
+    var $messageLabel = $('<label for="message">Enter message</label>');
+    var $messageInput = $('<input type="text" id="message-input" name="message"><br>');
+
+    // submit button
+    var $submitButton = $('<button type="submit">Submit</button>');
+
+    $form.appendTo($tweetFormDiv)
+    $usernameLabel.appendTo($form);
+    $usernameInput.appendTo($form);
+    $messageLabel.appendTo($form);
+    $messageInput.appendTo($form);
+    $submitButton.appendTo($tweetFormDiv);
   }
 
   function tweetUIcomponent(tweet) {
