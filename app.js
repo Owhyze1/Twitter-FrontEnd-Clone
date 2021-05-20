@@ -10,9 +10,11 @@ $(document).ready(function () {
   var $title = $('<div class="title">Twiddler</div>');
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   var $bottomHalf = $('<div id="bottom-half"></div>');
-  var $leftMenu = $('<div id="left-half"></div>');
-  var $feed = $('<div id="feed"></div>');
+  var $friendListDiv = $('<div id="friend-list-div"></div>');
   var $friendList = $('<div id="friend-list">Friends</div>');
+  var $feed = $('<div id="feed"></div>');
+  var $tweetFormDiv = $('<div id="tweet-form"></div>');
+
 
   // create event handler functions
   function titleEvent(event) {
@@ -45,7 +47,6 @@ $(document).ready(function () {
   }
 
   // set event listeners (and relevant handlers)
-  $title.on("click", titleEvent);
   $updateFeedButton.on("click", updateFeedEvent);
 
 
@@ -53,11 +54,12 @@ $(document).ready(function () {
   $title.appendTo($app);
   $updateFeedButton.appendTo($title);
   $bottomHalf.appendTo($app);
-  $leftMenu.appendTo($bottomHalf);
+  $friendListDiv.appendTo($bottomHalf);
   $feed.appendTo($bottomHalf);
-  $friendList.appendTo($leftMenu);
+  $friendList.appendTo($friendListDiv);
 
   renderFeed();
+  renderFriendList();
 
   // helper functions
   function renderFeed(user) {
@@ -77,7 +79,14 @@ $(document).ready(function () {
 
   function renderFriendList() {
     var friends = Object.keys(streams.users);
+
+    for (var i = 0; i < friends.length; i++) {
+      var $friend = $('<div id="friend"></div>');
+      $friend.text(friends[i]);
+      $friend.appendTo($friendList);
+    }
   }
+
   function tweetUIcomponent(tweet) {
     // new HTML elements
     var $tweet = $('<div class="tweet"></div>');
