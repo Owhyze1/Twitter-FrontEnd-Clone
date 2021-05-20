@@ -13,7 +13,7 @@ $(document).ready(function () {
   var $friendListDiv = $('<div id="friend-list-div"></div>');
   var $friendList = $('<div id="friend-list">Friends</div>');
   var $feed = $('<div id="feed"></div>');
-  var $tweetFormDiv = $('<div id="tweet-form"></div>');
+  var $tweetFormDiv = $('<div id="tweet-form">New Tweed</div>');
 
 
   // create event handler functions
@@ -34,7 +34,11 @@ $(document).ready(function () {
   function handleUsernameClick(event) {
     // re-render feed with only user's tweets
     $feed.html('');
-    var username = event.target.outerText.substring(1);
+    console.log(event);
+    var username = event.target.outerText;
+    if (username[0] === "@") {
+      username = username.substring(1);
+    }
     renderFeed(username);
 
     // change updateFeed button to Back button, and back again
@@ -85,6 +89,7 @@ $(document).ready(function () {
     for (var i = 0; i < friends.length; i++) {
       var $friend = $('<div id="friend"></div>');
       $friend.text(friends[i]);
+      $friend.on("click", handleUsernameClick);
       $friend.appendTo($friendList);
     }
   }
@@ -92,12 +97,12 @@ $(document).ready(function () {
   function tweetFormUI() {
     // username input and label
     var $form = $('<form id="form"></form>');
-    var $usernameLabel = $('<label for="username">User name</label>');
+    var $usernameLabel = $('<label for="username">User name</label><br>');
     var $usernameInput = $('<input type="text" id="user-name-input" name="username"><br>');
 
     // message input and label
-    var $messageLabel = $('<label for="message">Enter message</label>');
-    var $messageInput = $('<input type="text" id="message-input" name="message"><br>');
+    var $messageLabel = $('<label for="message">Enter message</label><br>');
+    var $messageInput = $('<textarea type="text" id="message-input" name="message" rows="4" cols="55"></textarea>');
 
     // submit button
     var $submitButton = $('<button type="submit">Submit</button>');
