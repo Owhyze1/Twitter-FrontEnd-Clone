@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 
   // create new HTML elements
-  var $title = $('<div class="title">Twiddler</div>');
+  var $title = $('<div class="title top-half">Twiddler</div>');
   var $updateFeedButton = $('<button type="button" id="update-feed">Update Feed</button>');
   var $bottomHalf = $('<div id="bottom-half"></div>');
   var $friendListDiv = $('<div id="friend-list-div"></div>');
